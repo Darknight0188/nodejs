@@ -13,10 +13,15 @@ html
                         a.nav-link(href='/') Home
                     li.nav-item
                         a.nav-link(href='/auth/login') Admin
-                    li.nav-item
+                if (!session.customerId)    
+                    li.nav-item(style= 'list-style:none;')
                         a.nav-link(href='/customer/register') Register
-                    li.nav-item()
+                    li.nav-item(style= 'list-style:none;')
                         a.nav-link(href='/customer/login') Login    
-            
+                else 
+                    li.nav-item(style= 'list-style:none;')
+                        a= session.customerName
+                    li.nav-item(style= 'list-style:none;')
+                        a.nav-link(href='/customer/logout') Logout     
         .container.pt-5
             block content

@@ -43,10 +43,6 @@ nav.navbar.navbar-expand.navbar-dark.bg-dark.static-top
         a.dropdown-item(href='/auth/logout') Logout
 #wrapper
   ul.sidebar.navbar-nav
-    li.nav-item
-      a.nav-link(href='#')
-        i.fas.fa-fw.fa-tachometer-alt
-        span Dashboard
     li.nav-item.dropdown
       a#pagesDropdown.nav-link.dropdown-toggle(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
         i.fas.fa-fw.fa-folder
@@ -55,8 +51,7 @@ nav.navbar.navbar-expand.navbar-dark.bg-dark.static-top
             h6.dropdown-header Login Screens:
             a.dropdown-item(href='/product') Product
             a.dropdown-item(href='/store') Store
-            a.dropdown-item(href='#') Cart
-            a.dropdown-item(href='#') Bill
+            a.dropdown-item(href='/cart/show') Cart
             a.dropdown-item(href='/users') Users
     li.nav-item
       a.nav-link(href='#')

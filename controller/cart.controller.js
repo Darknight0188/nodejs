@@ -71,6 +71,21 @@ module.exports.checkOut = function(req,res) {
     res.redirect('/');
 };
 
+module.exports.showCart = function(req,res){
+    con.query('SELECT customer.name, stores.storeName, carts.orderDate, carts.total, carts.id FROM ((carts INNER JOIN customer ON carts.userId = customer.id) INNER JOIN stores ON carts.storeID = stores.storeId)', function(err,result){
+        if(err) throw err;
+        res.render('admin/cart/index',{carts: result})
+    })
+}
+
+module.exports.cartDetails = function(req,res) {
+    var cartId = req.params.cartId;
+    con.query('SELECT products.name, cartdetails.quantity FROM cartdetails INNER JOIN products ON products.id = cartdetails.productId WHERE cartdetails.cartId = ?',[cartId], function(err,result) {
+        if(err) throw err;
+        res.render('admin/cart/cartDetail',{carts:result})
+    })
+}
+
 
 
 

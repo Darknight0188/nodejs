@@ -76,6 +76,7 @@ module.exports.postLogin = function(req,res){
             });
             return;
         }
+        req.session.customerName = result[0].name
         req.session.customerId = result[0].id;
         req.session.storeId = result[0].storeId; 
         req.session.cart = {};
@@ -86,6 +87,6 @@ module.exports.postLogin = function(req,res){
 }
 
 module.exports.logout = function(req,res){
-    res.clearCookie("id");
+    req.session.destroy();
     res.redirect('/')
 }
