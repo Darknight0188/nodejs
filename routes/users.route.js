@@ -17,5 +17,9 @@ router.get('/:userId/delete',authMiddleware.requireAuth,controller.deleteUser);
 
 router.get('/search',authMiddleware.requireAuth,controller.searchUser);
 
+router.get('/changepassword/:id',authMiddleware.requireAuth,controller.get_changePassword);
+
+router.post('/changepassword/:id',authMiddleware.requireAuth,controller.post_changePassword);
+
 
 module.exports = router;

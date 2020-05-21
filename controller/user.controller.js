@@ -97,4 +97,45 @@ module.exports.searchUser = function(req,res){
       });
       res.render('admin/users/index', {users: matchedStore});
   });
-}   
+}
+
+module.exports.get_changePassword = function(req,res) {
+    res.render('admin/users/changePassword')
+}
+
+module.exports.post_changePassword = function(req,res){
+      var id = req.params.id;
+      var errors = [];
+      if(!req.body.oldpassword){
+        errors.push('old password is required !')
+      }
+      if(!req.body.newpassword){
+        errors.push('new password required !')
+      }
+      if(!req.body.confirmpassword){
+        errors.push('Confirm password required !')
+      }
+      if(req.body.newpassword != req.body.confirmpassword) {
+        errors.push('Wrong password !')
+      }
+    if(errors.length){
+      res.render('admin/users/changePassword', {
+          errors: errors,
+          values: req.body
+      });
+      return;
+  }
+  var oldpassword = req.body.oldpassword;
+  var hashed_oldpaasword = md5(oldpassword);
+  var newPassword = req.body.newPassword;
+  var hashedPassword = md5(newPassword);
+  con.query('SELECT * FROM users WHERE id = ?',[id], function(err,result){
+    if(err) throw err;
+    if(result[0].password == hashed_oldpaasword) {
+        con.query('UPDATE users SET password = ? WHERE id = ?',[hashedPassword,id],function(err,result){
+            if(err) throw err;
+            res.redirect('/users');
+        })
+    }
+  })
+}

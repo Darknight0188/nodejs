@@ -20,8 +20,10 @@ html
                         a.nav-link(href='/customer/login') Login    
                 else 
                     li.nav-item(style= 'list-style:none;')
-                        a= session.customerName
+                        a(href='/customer/edit/'+ session.customerId)= session.customerName
                     li.nav-item(style= 'list-style:none;')
                         a.nav-link(href='/customer/logout') Logout     
         .container.pt-5
             block content
+
+

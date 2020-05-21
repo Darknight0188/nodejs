@@ -20,7 +20,8 @@ block content
         th
     each user in users
       tr
-        td= user.name
+        td
+          a(href=('/users/changepassword/'+user.id))= user.name
         td= user.username
         td= user.gender
         td= user.phone
