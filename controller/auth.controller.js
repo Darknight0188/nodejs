@@ -34,6 +34,7 @@ module.exports.postLogin = function (req,res,next) {
 		}
 		req.session.userId = result[0].id;
 		req.session.storeId = result[0].storeId;
+		req.session.role = result[0].role;
 		req.session.cart = {};
     	res.redirect('/users');
 });

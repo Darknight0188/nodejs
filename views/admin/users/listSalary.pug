@@ -1,0 +1,25 @@
+extends ../index
+
+block content
+  h1 
+    
+    span.mr-3 List Salary
+  table.table
+    tr
+        th UserId
+        th Salary
+        th Date
+        th Work Day
+        th Day Off
+        th Action
+    each salary in salarys
+      tr
+        td= salary.userId
+        td= salary.salary
+        td= salary.date
+        td= salary.workDay
+        td= salary.dayOff
+        td
+          a.btn.btn-xs.btn-info(href='/salary/edit/'+salary.id)
+              i.fa.fa-edit
+              | Edit

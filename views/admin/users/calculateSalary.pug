@@ -1,0 +1,22 @@
+extends ../index
+
+block content
+    
+    h1 Calculate salary
+
+    if errors
+        each error in errors
+            .alert.alert-danger= error
+
+    form(action="", method="POST")
+        .form-group
+            label(for="workday") Work Day
+            input#workday.form-control(type="number", name="workday", value=values ? values.workday : '')
+        .form-group    
+            label(for="dayoff") Day Off
+            input#dayoff.form-control(type="number", name="dayoff", value=values ? values.dayoff : '')
+        .form-group    
+            label(for="date") Date
+            input#date.form-control(type="date", name="dateStart", value=values ? values.date : '')                     
+
+        button(class="btn btn-primary") Calculate

@@ -18,6 +18,7 @@ block content
         th Address
         th Date In
         th
+        th
     each user in users
       tr
         td
@@ -34,3 +35,8 @@ block content
             a.btn.btn-xs.btn-danger(href='/users/'+user.id+'/delete')
               i.fa.fa-times
               | Delete
+        td
+            a.btn.btn-xs.btn-primary(href='/salary/calculate/'+user.id)
+              | Calculate Salary  
+            a.btn.btn-xs.btn-secondary(href='/salary/listSalary/'+user.id)
+              | List Salary       

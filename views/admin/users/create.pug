@@ -26,9 +26,6 @@ block content
                 option(value="male") Male
                 option(value="female") Female
         .form-group
-            label(for="dateofbirth") Date of birth
-            input#dateofbirth.form-control(type="date", name="dateofbirth", value=values ? values.dateofbirth : '')
-        .form-group
             label(for="address") Address
             input#address.form-control(type="text", name="address", value=values ? values.address : '')
         .form-group
@@ -39,6 +36,11 @@ block content
             select#storeId.form-control(name="storeId")
                 each store in stores
                     option(value=store.storeId)= store.storeName
+        .form-group
+            label(for="role") Level
+            select#role.form-control(name="role")
+                    option(value=0) Admin   
+                    option(value=1) Staff      
                                  
 
         button(class="btn btn-primary") Create

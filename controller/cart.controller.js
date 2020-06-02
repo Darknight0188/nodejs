@@ -2,7 +2,7 @@ var con = require('../mysql-connection');
 var Cart = require('../models/cart');
 
 module.exports.cart = function(req,res) {
-    con.query('SELECT * FROM products', function(err,result){
+    con.query('SELECT * FROM products INNER JOIN stores ON products.storeId = stores.storeId', function(err,result){
         if(err) throw err;
         res.render('index',{products: result})
     })

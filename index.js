@@ -7,6 +7,7 @@ var storeRoute = require('./routes/store.route');
 var productRoute = require('./routes/product.route');
 var cartRoute = require('./routes/cart.route');
 var cusRoute = require('./routes/customer.route');
+var salaryRoute = require('./routes/salary.route');
 var session = require('express-session');
 var sessionMiddleware = require('./middlewares/session.middleware');
 var cookieParser = require('cookie-parser');
@@ -37,6 +38,7 @@ app.use('/auth', authRoute);
 app.use('/store', storeRoute);
 app.use('/product', productRoute);
 app.use('/customer', cusRoute);
+app.use('/salary', salaryRoute);
 app.use('/', cartRoute);
 app.use(sessionMiddleware);
 

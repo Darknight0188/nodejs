@@ -5,15 +5,15 @@ var authMiddleware = require('../middlewares/auth.middleware');
 
 router.get('/',authMiddleware.requireAuth,controller.index);
 
-router.get('/create', authMiddleware.requireAuth,controller.getCreate);
+router.get('/create', authMiddleware.requireAdmin,controller.getCreate);
 
-router.post('/create',authMiddleware.requireAuth,controller.postCreate);
+router.post('/create',authMiddleware.requireAdmin,controller.postCreate);
 
 router.get('/:userId/edit',authMiddleware.requireAuth,controller.get_editUser);
 
 router.post('/:userId/edit',authMiddleware.requireAuth,controller.post_editUser);
 
-router.get('/:userId/delete',authMiddleware.requireAuth,controller.deleteUser);
+router.get('/:userId/delete',authMiddleware.requireAdmin,controller.deleteUser);
 
 router.get('/search',authMiddleware.requireAuth,controller.searchUser);
 

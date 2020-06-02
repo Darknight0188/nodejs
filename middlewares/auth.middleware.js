@@ -28,3 +28,18 @@ module.exports.requireSignin = function(req,res,next){
         next();
     })
 }
+
+module.exports.requireAdmin = function(req, res ,next){
+    if(!req.session.userId) {
+        res.redirect('/auth/login');
+        return;
+    }
+    con.query('SELECT * FROM users WHERE id = ?', req.session.userId, function (err, result) { 
+        if (err) throw err;
+        if(result[0].role != 0){
+            res.redirect('/users');
+        }
+        res.locals.user = result[0];
+        next()
+  });
+};

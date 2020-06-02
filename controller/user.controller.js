@@ -54,10 +54,11 @@ module.exports.postCreate = function(req, res) {
       req.body.phone,
       req.body.address,
       req.body.datein,
-      req.body.storeId
+      req.body.storeId,
+      req.body.role
     ]
 
-    con.query('INSERT INTO users (id, username, password, name, gender, phone, address, datein, storeId) VALUES (?)',[values], function(err, result){
+    con.query('INSERT INTO users (id, username, password, name, gender, phone, address, datein, storeId, role) VALUES (?)',[values], function(err, result){
       if(err) throw err;
         console.log("1 record inserted");
     });
@@ -138,4 +139,54 @@ module.exports.post_changePassword = function(req,res){
         })
     }
   })
+}
+
+module.exports.getCalculateSalary = function(req,res){
+    res.render('admin/users/calculateSalary');
+}
+
+module.exports.postCalculateSalary = function(req,res){
+    var userId = req.params.id;
+    var id = shortid.generate();
+    var workday = req.body.workday;
+    var dayoff = req.body.dayoff;
+    var date = req.body.dateStart;
+    var salary = workday * 160000;
+    var values=  [
+      id,
+      salary,
+      date,
+      userId,
+      workday,
+      dayoff
+    ];
+    con.query('INSERT INTO salary (id,salary,date,userId,workDay,dayOff) VALUES (?)',[values],function(err,result){
+      if(err) throw err;
+      console.log("1 record inserted");
+      res.redirect('/salary/listSalary');
+    })
+}
+
+module.exports.listSalary = function(req,res){
+    var userId = req.params.id;
+    con.query('SELECT * FROM salary WHERE userId = ?',[userId],function(err,result){
+      if(err) throw err;
+      res.render('admin/users/listSalary',{salarys:result});
+    })
+}
+
+module.exports.editSalary = function(req,res){
+    res.render('admin/users/editSalary',);
+  
+}
+
+module.exports.post_editSalary = function(req,res){
+    var id = req.params.id;
+    var workday = req.body.workday;
+    var dayoff = req.body.dayoff;
+    var salary = workday * 160000;
+    con.query('UPDATE salary SET workDay=?, dayOff=?, salary=? WHERE id = ?',[workday, dayoff, salary, id], function(err,result){
+      if(err) throw err;
+      res.redirect('/users');
+    })
 }
